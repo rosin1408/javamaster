@@ -17,6 +17,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.biblioteca.MainServer;
+import br.com.biblioteca.exception.ValidationException;
 import br.com.biblioteca.model.Pessoa;
 import br.com.biblioteca.repository.PessoaRepository;
 
@@ -80,7 +81,28 @@ public class PessoaServiceTest {
 		
 		Pessoa busca = service.buscarPorId(1L);
 		
-		assertEquals(1L, busca.getId());
+		assertEquals(new Long(1), busca.getId());
+	}
+	
+	@Test
+	public void deveIncluirUmaNovaPessoa() {
+		Pessoa pessoa = criarPessoa();
+		when(repository.save(pessoa)).thenReturn(pessoa);
+		
+		Pessoa salvo = service.salvar(pessoa);
+		
+		assertEquals(pessoa.getNome(), salvo.getNome());
+		verify(repository).save(pessoa);
+	}
+	
+	@Test
+	public void deveExcluirUmaPessoa() throws ValidationException {
+		Pessoa pessoa = criarPessoa();
+		when(repository.findOne(pessoa.getId())).thenReturn(pessoa);
+		
+		service.excluir(1L);
+		
+		verify(repository).delete(1L);
 	}
 	
 	private Pessoa criarPessoa() {

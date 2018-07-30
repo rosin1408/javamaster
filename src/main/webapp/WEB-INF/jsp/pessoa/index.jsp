@@ -28,8 +28,8 @@
 						<td>${pessoa.dataNascimento}</td>
 						<td>${pessoa.cpf}</td>
 						<td>${pessoa.funcionario}</td>
-						<td><a href="/pessoa/${pessoa.id}">Alterar </a>
-						<a href="/pessoa/${pessoa.id}/excluir">Excluir</a></td>
+						<td><a href="/pessoa/${pessoa.id}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Alterar </a>
+						<a href="/pessoa/${pessoa.id}/excluir"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Excluir</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -25,4 +25,12 @@ public class PessoaService {
 	public Pessoa buscarPorId(long id) {
 		return repository.findOne(id);
 	}
+	
+	public Pessoa salvar(Pessoa pessoa) {
+		return this.repository.save(pessoa);
+	}
+
+	public void excluir(Long id) {
+		this.repository.delete(id);
+	}
 }
